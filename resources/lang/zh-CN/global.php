@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'are_you_sure_to_delete' => '确定要删除此记录吗？',
+    'actions' => '操作',
+    'back' => '返回',
+    'cancel' => '取消',
+    'close' => '关闭',
+    'create' => '创建',
+    'created_at' => '创建时间',
+    'delete' => '删除',
+    'deselect_all' => '取消选择',
+    'details' => '详情',
+    'edit' => '编辑',
+    'filter' => '过滤',
+    'reset' => '重置',
+    'save' => '保存',
+    'saved' => '已保存',
+    'select' => '选择',
+    'select_all' => '选择全部',
+    'search' => '搜索',
+    'show' => '查看',
+    'submit' => '提交',
+    'this_action_cannot_be_undone' => '此操作无法撤销。请确认继续。',
+    'update' => '更新',
+    'updated_at' => '更新时间',
+    'view' => '查看',
+];
