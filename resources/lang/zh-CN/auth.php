@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'account_disabled' => '您的账户已被禁用。请联系管理员。',
     'email' => '邮箱',
     'email_failed' => '邮箱或密码错误。',
     'login' => '登录',

@@ -6,13 +6,14 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Middleware\AdminAuthenticate;
+use App\Http\Middleware\CheckInternalUserStatus;
 use Illuminate\Support\Facades\Route;
 
 Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
-Route::middleware(AdminAuthenticate::class)->group(function () {
+Route::middleware([AdminAuthenticate::class, CheckInternalUserStatus::class])->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
