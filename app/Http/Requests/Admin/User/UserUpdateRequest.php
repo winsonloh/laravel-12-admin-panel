@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Admin\User;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UserUpdateRequest extends FormRequest
 {
@@ -41,6 +43,7 @@ class UserUpdateRequest extends FormRequest
                 'unique:users,email,'.request()->route('user')->id,
             ],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'status' => ['required', Rule::in(User::STATUS_ACTIVE, User::STATUS_INACTIVE)],
             'role' => ['required', 'integer', 'exists:roles,id', function ($attribute, $value, $fail) {
                 if ($value == 1 && !Auth::user()->roles->contains('name', 'super_admin')) {
                     $fail(__('validation.custom.role.super_admin'));
@@ -71,6 +74,8 @@ class UserUpdateRequest extends FormRequest
             'password.string' => __('validation.string', ['attribute' => __('admin/user.attributes.password')]),
             'password.min' => __('validation.min', ['attribute' => __('admin/user.attributes.password'), 'min' => 8]),
             'password.confirmed' => __('validation.confirmed', ['attribute' => __('admin/user.attributes.password')]),
+            'status.required' => __('validation.required', ['attribute' => __('admin/user.attributes.status')]),
+            'status.in' => __('validation.in', ['attribute' => __('admin/user.attributes.status')]),
             'role.required' => __('validation.required', ['attribute' => __('admin/user.attributes.role')]),
             'role.string' => __('validation.string', ['attribute' => __('admin/user.attributes.role')]),
             'role.exists' => __('validation.exists', ['attribute' => __('admin/user.attributes.role')]),

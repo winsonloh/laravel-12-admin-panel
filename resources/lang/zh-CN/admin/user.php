@@ -8,10 +8,15 @@ return [
         'password' => '密码',
         'password_confirmation' => '确认密码',
         'role' => '角色',
+        'status' => '状态',
     ],
     'title' => '用户',
     'title_plural' => '用户',
     'create' => '创建用户',
     'edit' => '编辑用户',
     'show' => '用户详情',
+    'status' => [
+        'active' => '已激活',
+        'inactive' => '已禁用',
+    ],
 ];

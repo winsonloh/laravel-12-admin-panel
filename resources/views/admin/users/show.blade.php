@@ -26,16 +26,30 @@
                             <tr>
                                 <td class="px-4 py-2">{{ __('admin/user.attributes.role') }}</td>
                                 <td class="px-4 py-2">
-                                    <span class="bg-indigo-100 text-indigo-700 text-sm px-2 py-1 mx-px mb-2 rounded-md inline-block break-all">
+                                    <span class="bg-indigo-100 text-indigo-700 text-sm px-2 py-1 mx-px rounded-md inline-block break-all">
                                         {{ ucwords(str_replace('_', ' ', $user->roles->first()->name)) }}
                                     </span>
                                 </td>
                             </tr>
                             <tr class="bg-gray-100">
+                                <td class="px-4 py-2">{{ __('admin/user.attributes.status') }}</td>
+                                <td class="px-4 py-2">
+                                    @if ($user->status === 'active')
+                                        <span class="bg-green-100 text-green-700 text-sm px-2 py-1 mx-px rounded-md inline-block break-all">
+                                            {{ __('admin/user.status.active') }}
+                                        </span>
+                                    @else
+                                        <span class="bg-red-100 text-red-700 text-sm px-2 py-1 mx-px rounded-md inline-block break-all">
+                                            {{ __('admin/user.status.inactive') }}
+                                        </span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="px-4 py-2">{{ __('global.created_at') }}</td>
                                 <td class="px-4 py-2">{{ $user->created_at->format('d/m/Y H:i') }}</td>
                             </tr>
-                            <tr>
+                            <tr class="bg-gray-100">
                                 <td class="px-4 py-2">{{ __('global.updated_at') }}</td>
                                 <td class="px-4 py-2">{{ $user->updated_at->format('d/m/Y H:i') }}</td>
                             </tr>
