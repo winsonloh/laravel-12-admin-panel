@@ -56,6 +56,20 @@
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
 
+                        <div>
+                            <x-input-label for="status" :value="__('admin/user.attributes.status')" :required="true" />
+                            <x-select-input
+                                :options="[
+                                    'active' => __('admin/user.status.active'),
+                                    'inactive' => __('admin/user.status.inactive'),
+                                ]"
+                                id="status"
+                                name="status"
+                                class="mt-1 block w-full"
+                            />
+                            <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                        </div>
+
                         <div class="flex items-center gap-4">
                             <a href="{{ route('admin.users.index') }}">
                                 <x-secondary-button>{{ __('global.back') }}</x-secondary-button>

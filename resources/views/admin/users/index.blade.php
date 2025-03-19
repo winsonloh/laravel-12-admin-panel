@@ -9,12 +9,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <x-table
                 :create="auth()->user()->can('user_create') ? ['url' => route('admin.users.create'), 'label' => __('admin/user.create')] : null"
-                :headers="['id', 'name', 'username', 'role', 'created_at']"
+                :headers="['id', 'name', 'username', 'role', 'status', 'created_at']"
                 :labels="[
                     'ID',
                     __('admin/user.attributes.name'),
                     __('admin/user.attributes.username'),
                     __('admin/user.attributes.role'),
+                    __('admin/user.attributes.status'),
                     __('global.created_at'),
                     __('global.actions')
                 ]"
@@ -27,6 +28,9 @@
                             $user->roles->map(function($role) {
                                 return '<span class="bg-indigo-100 text-indigo-700 text-sm px-2 py-1 mx-px mb-2 rounded-md inline-block break-all">' . ucwords(str_replace('_', ' ', $role->name)) . '</span>';
                             })->implode(' ')
+                        @endverbatim,
+                        'status' => @verbatim
+                            $user->status === 'active' ? '<span class="bg-green-100 text-green-700 text-sm px-2 py-1 mx-px mb-2 rounded-md inline-block break-all">' . __('admin/user.status.active') . '</span>' : '<span class="bg-red-100 text-red-700 text-sm px-2 py-1 mx-px mb-2 rounded-md inline-block break-all">' . __('admin/user.status.inactive') . '</span>'
                         @endverbatim,
                         'created_at' => $user->created_at->format('d/m/Y H:i'),
                         'actions' => array_filter([

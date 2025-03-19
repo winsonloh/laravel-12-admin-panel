@@ -1,6 +1,40 @@
 @props(['options' => [], 'selected' => null])
 
-<div x-data="dropdown()" class="relative w-full">
+@once
+@push('scripts')
+<script>
+    window.dropdown = function(id) {
+        return {
+            id: id,
+            open: false,
+            selected: null,
+            options: {},
+
+            init() {
+                this.selected = this.$el.dataset.selected;
+                this.options = JSON.parse(this.$el.dataset.options);
+            },
+
+            selectedLabel() {
+                return this.selected ? this.options[this.selected] : '';
+            },
+
+            selectItem(key) {
+                this.selected = key;
+                this.open = false;
+            }
+        };
+    }
+</script>
+@endpush
+@endonce
+
+<div 
+    x-data="dropdown('{{ $attributes->get('id') }}')"
+    x-init="init()"
+    data-selected="{{ $selected }}"
+    data-options='@json($options)'
+    class="relative w-full">
     <!-- Display Selected Value -->
     <div class="border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm p-2 cursor-pointer bg-white flex items-center justify-between"
          @click="open = !open">
@@ -24,23 +58,3 @@
     <!-- Hidden Input for Form Submission -->
     <input type="hidden" name="{{ $attributes->get('name') }}" :value="selected">
 </div>
-
-<!-- Alpine.js Logic -->
-<script>
-    function dropdown() {
-        return {
-            open: false,
-            selected: @json($selected),
-            options: @json($options),
-
-            selectedLabel() {
-                return this.selected ? this.options[this.selected] : '';
-            },
-
-            selectItem(key) {
-                this.selected = key;
-                this.open = false; // Close dropdown after selection
-            }
-        };
-    }
-</script>

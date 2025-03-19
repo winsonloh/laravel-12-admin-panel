@@ -16,6 +16,14 @@ class User extends Authenticatable
     use Auditable, Filterable, HasFactory, HasRoles, Notifiable;
 
     /**
+     * The statuses for the user.
+     *
+     * @var list<string>
+     */
+    const STATUS_ACTIVE = 'active';
+    const STATUS_INACTIVE = 'inactive';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
@@ -25,6 +33,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'status',
     ];
 
     /**
@@ -47,6 +56,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'status' => 'string',
         ];
     }
 
@@ -68,5 +78,15 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->hasRole('admin');
+    }
+
+    /**
+     * Check if the user is active.
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->status === self::STATUS_ACTIVE;
     }
 }
