@@ -15,10 +15,21 @@ class PermissionsTableSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         $permissions = [
-            'view users',
-            'edit users',
-            'delete users',
-            'create users',
+            'user_access',
+            'user_view',
+            'user_create',
+            'user_edit',
+            'user_delete',
+            'permission_access',
+            'permission_view',
+            'permission_create',
+            'permission_edit',
+            'permission_delete',
+            'role_access',
+            'role_view',
+            'role_create',
+            'role_edit',
+            'role_delete',
         ];
 
         foreach ($permissions as $permission) {
